@@ -1,0 +1,143 @@
+@import url(https://fonts.googleapis.com/css?family=Chewy);
+
+$primary: #6927ff;
+$secondary: #837dff;
+$hovered: #bf81ff;
+$links: #ffd581;
+
+@import "shadow";
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+html, body, .main-wrap {
+    height: 100%;
+    width: 100%;
+}
+
+.main-wrap {
+    background-color: $secondary;
+    & .header {
+        background-color: $primary;
+        padding: 0.85rem 0.75rem 0.5rem 0.75rem;
+        font-family: Chewy, sans-serif;
+        color: #fff;
+        display: flex;
+        justify-content: space-between;
+        @include box_shadow(2);
+        span:not(.im) {
+            font-size: 2em;
+            text-shadow: 2px 2px 0 darken($primary, 15);
+        }
+        span.im {
+            padding-top: 0.35rem;
+            font-size: 2em;
+            &.active {
+                animation: rotationer 0.75s 1 ease;
+            }
+        }
+    }
+    & .card {
+        position: relative;
+        width: 90%;
+        height: 75%;
+        background-color: #fff;
+        margin: 2rem auto 0 auto;
+        padding: 2rem 1rem;
+        border-radius: 0.25rem;
+        @include box_shadow(3);
+        transition: transform 1s ease-out;
+        &.active {
+          transform: rotateY(180deg);
+          & div.back {
+            opacity: 1;
+          }
+          & div.front {
+            opacity: 0;
+          }
+        }
+        & div {
+          position: absolute;
+          width: 90%;
+          user-select: none;
+          font-family: Chewy, sans-serif;
+          font-size: 2em;
+          text-align: center;
+          color: $hovered;
+          left: 50%;
+          transform: translateX(-50%);
+          transition: opacity 0.75s ease-out;
+          &.back {
+            opacity: 0;
+            right: 50%;
+            transform: rotateY(180deg) translateX(50%);
+          }
+        }
+    }
+    & .action-button {
+        position: fixed;
+        bottom: 10%;
+        right: 10%;
+        z-index: 2;
+        border-radius: 50%;
+        background-color: $primary;
+        height: 4em;
+        width: 4em;
+        @include box_shadow(2);
+        & span.im {
+            color: #fff;
+            font-size: 2em;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            &.active {
+                animation: rotationer-transform 0.75s 1 ease;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    #headerb {
+        display: none;
+    }
+    .main-wrap .card div {
+        font-size: 160%;
+    }
+}
+
+@media only screen and (min-width: 601px) {
+    .action-button {
+        display: none;
+    }
+}
+
+@media only screen and (max-height: 350px) {
+    html, body, .main-wrap {
+        height: 110%;
+    }
+}
+
+// Animations
+@keyframes rotationer {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes rotationer-transform {
+    from {
+        transform: translate(-50%,-50%) rotate(0deg);
+    }
+    to {
+        transform: translate(-50%,-50%) rotate(360deg);
+    }
+}
+
