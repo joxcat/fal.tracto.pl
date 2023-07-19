@@ -10,8 +10,7 @@
     <meta name="description" content="Flashcard PWA test">
     <link rel="stylesheet" href="/assets/css/style.css">
     <noscript>
-      <link rel="stylesheet" href="https://cdn.iconmonstr.com/1.3.0/css/iconmonstr-iconic-font.min.css
-  ">
+      <link rel="stylesheet" href="/css/iconmonstr-iconic-font.min.css">
     </noscript>
     <!-- Javascript -->
     <script type="text/javascript" defer src="/js/jquery.min.js"></script>
@@ -31,11 +30,13 @@
     <div class="main-wrap">
         <div class="header">
             <span>Faluche IUT Flashcards</span>
-            <span id="headerb" class="im im-sync"></span>
+            <span id="headerb">(Spé)</span>
         </div>
         <div class="card">
+          <div class="card-inner">
             <div class="front"></div>
             <div class="back"></div>
+          </div>
         </div>
         <div class="action-button"><span id="actionb" class="im im-sync"></span></div>
     </div>
@@ -45,7 +46,7 @@
     <script defer type="text/javascript">
       let giftofspeed = document.createElement('link');
       giftofspeed.rel = 'stylesheet';
-      giftofspeed.href = 'https://cdn.iconmonstr.com/1.3.0/css/iconmonstr-iconic-font.min.css';
+      giftofspeed.href = '/css/iconmonstr-iconic-font.min.css';
       giftofspeed.type = 'text/css';
       let godefer = document.getElementsByTagName('link')[0];
       godefer.parentNode.insertBefore(giftofspeed, godefer);

@@ -1,7 +1,7 @@
 @import url(https://fonts.googleapis.com/css?family=Chewy);
 
-$primary: #6927ff;
-$secondary: #837dff;
+$primary: #f67280;
+$secondary: #c06c84;
 $hovered: #bf81ff;
 $links: #ffd581;
 
@@ -16,10 +16,23 @@ $links: #ffd581;
 html, body, .main-wrap {
     height: 100%;
     width: 100%;
+    overflow: hidden;
+}
+
+#headerb {
+    opacity: 0.5;
+    transition: opacity 0.5s ease-out;
+    user-select: none;
+
+    &:hover {
+        cursor: pointer;
+        opacity: 0.75;
+    }
 }
 
 .main-wrap {
     background-color: $secondary;
+
     & .header {
         background-color: $primary;
         padding: 0.85rem 0.75rem 0.5rem 0.75rem;
@@ -28,53 +41,54 @@ html, body, .main-wrap {
         display: flex;
         justify-content: space-between;
         @include box_shadow(2);
-        span:not(.im) {
-            font-size: 2em;
+        span {
+            font-size: 2.5em;
             text-shadow: 2px 2px 0 darken($primary, 15);
         }
-        span.im {
-            padding-top: 0.35rem;
-            font-size: 2em;
-            &.active {
-                animation: rotationer 0.75s 1 ease;
-            }
-        }
     }
+
     & .card {
         position: relative;
         width: 90%;
         height: 75%;
-        background-color: #fff;
-        margin: 2rem auto 0 auto;
-        padding: 2rem 1rem;
-        border-radius: 0.25rem;
-        @include box_shadow(3);
-        transition: transform 1s ease-out;
-        &.active {
-          transform: rotateY(180deg);
-          & div.back {
-            opacity: 1;
-          }
-          & div.front {
-            opacity: 0;
-          }
+        background-color: transparent;
+        margin: 2rem auto 0;
+        perspective: 2000px;
+
+        &.active .card-inner {
+            transform: rotateY(180deg);
         }
-        & div {
-          position: absolute;
-          width: 90%;
-          user-select: none;
-          font-family: Chewy, sans-serif;
-          font-size: 2em;
-          text-align: center;
-          color: $hovered;
-          left: 50%;
-          transform: translateX(-50%);
-          transition: opacity 0.75s ease-out;
-          &.back {
-            opacity: 0;
-            right: 50%;
-            transform: rotateY(180deg) translateX(50%);
-          }
+
+        .card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            font-family: Chewy, sans-serif;
+            font-size: 2.5em;
+            transition: transform 0.8s;
+            transform-style: preserve-3d;
+
+            .front, .back {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                backface-visibility: hidden;
+                padding: 2rem 1rem;
+                border-radius: 0.25rem;
+                @include box_shadow(3);
+            }
+
+            .front {
+                background-color: #fff;
+                color: #6c5b7b;
+            }
+
+            .back {
+                background-color: #6c5b7b;
+                color: #fff;
+                transform: rotateY(180deg);
+            }
         }
     }
     & .action-button {
@@ -102,17 +116,36 @@ html, body, .main-wrap {
 }
 
 @media only screen and (max-width: 600px) {
-    #headerb {
-        display: none;
-    }
-    .main-wrap .card div {
-        font-size: 160%;
+    .main-wrap {
+        .header span {
+            font-size: 1.5em;
+        }
+
+        .card {
+            height: 85%;
+            margin: 1rem auto 0;
+
+            div {
+                font-size: 1em;
+
+                &.em115 {
+                    font-size: 0.6em;
+                }
+            }
+
+            .card-inner {
+                .front, .back {
+                    padding: 1rem 0.75rem;
+                }
+            }
+        }
     }
 }
 
 @media only screen and (min-width: 601px) {
-    .action-button {
-        display: none;
+    .main-wrap .card {
+        width: 75%;
+        perspective: 3000px;
     }
 }
 
